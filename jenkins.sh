@@ -11,6 +11,18 @@ xfs_growfs /home
 xfs_growfs /var/tmp
 xfs_growfs /var
 
+
+#jenkins
+sudo curl -o /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo cat /etc/yum.repos.d/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+sudo yum install fontconfig java-17-openjdk -y
+sudo yum install jenkins -y
+sudo systemctl daemon-reload
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
 yum install java-17-openjdk -y
 yum install -y yum-utils
 yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
@@ -28,16 +40,16 @@ systemctl start docker
 systemctl enable docker
 usermod -aG docker ec2-user
 
-# # Helm
-# curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-# chmod 700 get_helm.sh
-# ./get_helm.sh
+# Helm
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
 
-# # Maven for Java projects
-# dnf install maven -y
+# Maven for Java projects
+dnf install maven -y
 
-# # Python for python projects
-# dnf install python3.11 gcc python3-devel -y
+# Python for python projects
+dnf install python3.11 gcc python3-devel -y
 
 
 
